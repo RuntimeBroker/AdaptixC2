@@ -29,13 +29,14 @@ jobs:
         pwd
         ls
         
-    # - uses: goreleaser/goreleaser-action@v4
-    #   with:
-    #     args: "release --rm-dist --snapshot"
-    #     version: 1.23.0
-    #   env:
-    #     GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-    #     path: ./ # 可根据你的项目结构选择编译产物路径
+    - uses: goreleaser/goreleaser-action@v4
+      with:
+        workdir: /home/runner/work/AdaptixC2/AdaptixC2/AdaptixServer
+        args: "release --rm-dist --snapshot"
+        version: 1.23.0
+      env:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        path: ./ # 可根据你的项目结构选择编译产物路径
     # - name: Zip files
     #   run: zip -r dist/VcenterKiller_archive.zip dist/VcenterKiller* #编译后的名字 ，在虚拟机默认文件会在dist目录下
     # - name: Upload binaries to release
