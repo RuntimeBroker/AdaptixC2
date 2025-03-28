@@ -45,9 +45,10 @@ jobs:
     - name: 安装 Qt 6
       uses: jurplel/install-qt-action@v4
       with:
-        version: '6.1.2' # 指定所需的 Qt 版本
+        version: '6.5.0' # 指定所需的 Qt 版本
         host: 'windows'
         target: 'desktop'
+        modules: 'qtwebsockets'
     - name: 设置环境变量
       run: |
           echo "C:\Program Files\OpenSSL\bin" >> $env:GITHUB_PATH
