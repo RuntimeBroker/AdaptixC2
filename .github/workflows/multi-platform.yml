@@ -41,7 +41,13 @@ jobs:
 
     - name: 使用 Chocolatey 安装依赖项
       run: |
-          choco install -y mingw cmake openssl qt6-default-tools
+          choco install -y mingw cmake openssl
+    - name: 安装 Qt 6
+      uses: jurplel/install-qt-action@v4
+      with:
+        version: '6.1.2' # 指定所需的 Qt 版本
+        host: 'windows'
+        target: 'desktop'
     # - name: Set reusable strings
     #   # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
     #   id: strings
