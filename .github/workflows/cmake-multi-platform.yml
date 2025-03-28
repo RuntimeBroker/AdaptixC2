@@ -41,16 +41,18 @@ jobs:
       run: |
         cd ./AdaptixServer
         ls
+        cd ./dist
+        ls
         
-    - name: Zip files
-      run: zip -r dist/AdaptixC2Server_archive.zip dist/AdaptixC2* #编译后的名字 ，在虚拟机默认文件会在dist目录下
+    # - name: Zip files
+    #   run: zip -r dist/AdaptixC2Server_archive.zip dist/AdaptixC2* #编译后的名字 ，在虚拟机默认文件会在dist目录下
       
-    - name: Upload binaries to release
-      uses: svenstaro/upload-release-action@v2
-      with:
-         repo_token: ${{ secrets.GITHUB_TOKEN }}
-         file: dist/AdaptixC2Server_archive.zip
-         tag: ${{ github.ref }}
-         overwrite: true
-         file_glob: true
-         draft: false #编译完成后 会自动发布到release
+    # - name: Upload binaries to release
+    #   uses: svenstaro/upload-release-action@v2
+    #   with:
+    #      repo_token: ${{ secrets.GITHUB_TOKEN }}
+    #      file: dist/AdaptixC2Server_archive.zip
+    #      tag: ${{ github.ref }}
+    #      overwrite: true
+    #      file_glob: true
+    #      draft: false #编译完成后 会自动发布到release
