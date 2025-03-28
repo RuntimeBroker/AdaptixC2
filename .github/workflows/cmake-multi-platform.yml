@@ -38,7 +38,9 @@ jobs:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         path: ./ # 可根据你的项目结构选择编译产物路径
     - name: entry AdaptixServer
-      run: cd ./AdaptixServer
+      run: |
+        cd ./AdaptixServer
+        ls
         
     - name: Zip files
       run: zip -r dist/AdaptixC2Server_archive.zip dist/AdaptixC2* #编译后的名字 ，在虚拟机默认文件会在dist目录下
