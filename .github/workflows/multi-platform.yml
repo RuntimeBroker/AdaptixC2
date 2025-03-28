@@ -48,25 +48,29 @@ jobs:
         version: '6.1.2' # 指定所需的 Qt 版本
         host: 'windows'
         target: 'desktop'
-    # - name: Set reusable strings
-    #   # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
-    #   id: strings
-    #   shell: bash
-    #   run: |
-    #     echo "build-output-dir=${{ github.workspace }}/AdaptixClient/build" >> "$GITHUB_OUTPUT"
+    - name: 设置环境变量
+      run: |
+          echo "C:\Program Files\OpenSSL\bin" >> $env:GITHUB_PATH
+          echo "D:\a\AdaptixC2\Qt\6.1.2\msvc2019_64\bin" >> $env:GITHUB_PATH
+    - name: Set reusable strings
+      # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
+      id: strings
+      shell: bash
+      run: |
+        echo "build-output-dir=${{ github.workspace }}/AdaptixClient/build" >> "$GITHUB_OUTPUT"
 
-    # - name: Configure CMake
-    #   # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
-    #   # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-    #   run: >
-    #     cmake -B ${{ steps.strings.outputs.build-output-dir }}
-    #     -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
-    #     -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
-    #     -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-    #     -S ${{ github.workspace }}/AdaptixClient
-    # - name: Build
-    #   # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
-    #   run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+    - name: Configure CMake
+      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+      run: >
+        cmake -B ${{ steps.strings.outputs.build-output-dir }}
+        -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
+        -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
+        -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        -S ${{ github.workspace }}/AdaptixClient
+    - name: Build
+      # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
+      run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
 
     # - name: Test
     #   working-directory: ${{ steps.strings.outputs.build-output-dir }}
