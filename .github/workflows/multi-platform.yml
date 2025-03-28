@@ -49,6 +49,7 @@ jobs:
         host: 'windows'
         target: 'desktop'
         modules: 'qtwebsockets'
+        archives: 'qtbase'
     - name: 设置环境变量
       run: |
           echo "C:\Program Files\OpenSSL\bin" >> $env:GITHUB_PATH
