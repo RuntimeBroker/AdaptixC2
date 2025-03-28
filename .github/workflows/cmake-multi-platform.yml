@@ -38,13 +38,13 @@ jobs:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         path: ./ # 可根据你的项目结构选择编译产物路径
     - name: Zip files
-      run: zip -r dist/AdaptixServer_archive.zip dist/AdaptixServer* #编译后的名字 ，在虚拟机默认文件会在dist目录下
+      run: zip -r dist/AdaptixC2Server_archive.zip dist/AdaptixC2* #编译后的名字 ，在虚拟机默认文件会在dist目录下
       
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
          repo_token: ${{ secrets.GITHUB_TOKEN }}
-         file: dist/AdaptixServer*
+         file: dist/AdaptixC2Server_archive.zip
          tag: ${{ github.ref }}
          overwrite: true
          file_glob: true
