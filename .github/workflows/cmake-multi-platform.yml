@@ -22,4 +22,25 @@ jobs:
       shell: bash
       run: |
         pwd
+        ls
+        chmod +x ./pre_install_linux.sh
         ./pre_install_linux.sh
+        
+    - uses: goreleaser/goreleaser-action@v4
+      with:
+        args: "release --rm-dist --snapshot"
+        version: 1.23.0
+      env:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        path: ./ # 可根据你的项目结构选择编译产物路径
+    - name: Zip files
+      run: zip -r dist/VcenterKiller_archive.zip dist/VcenterKiller* #编译后的名字 ，在虚拟机默认文件会在dist目录下
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+         repo_token: ${{ secrets.GITHUB_TOKEN }}
+         file: dist/VcenterKiller*
+         tag: ${{ github.ref }}
+         overwrite: true
+         file_glob: true
+         draft: false #编译完成后 会自动发布到release
