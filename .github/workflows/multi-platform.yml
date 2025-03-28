@@ -72,7 +72,7 @@ jobs:
          os: windows
          # what platform are you installing for? desktop, winrt, android, or ios
          platform: desktop
-    
+  
     - name: Build
       # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
       run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
