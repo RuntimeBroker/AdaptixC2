@@ -25,6 +25,7 @@ jobs:
         ls
         chmod +x ./pre_install_linux.sh
         ./pre_install_linux.sh
+        cd /AdaptixServer
         
     - uses: goreleaser/goreleaser-action@v4
       with:
@@ -34,12 +35,12 @@ jobs:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         path: ./ # 可根据你的项目结构选择编译产物路径
     - name: Zip files
-      run: zip -r dist/VcenterKiller_archive.zip dist/VcenterKiller* #编译后的名字 ，在虚拟机默认文件会在dist目录下
+      run: zip -r dist/AdaptixServer_archive.zip dist/AdaptixServer* #编译后的名字 ，在虚拟机默认文件会在dist目录下
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
          repo_token: ${{ secrets.GITHUB_TOKEN }}
-         file: dist/VcenterKiller*
+         file: dist/AdaptixServer*
          tag: ${{ github.ref }}
          overwrite: true
          file_glob: true
