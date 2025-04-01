@@ -28,6 +28,8 @@ jobs:
       run: |
         make extenders
         ls
+        cd dist
+        ls
     # #编译AdaptixServer项目
     # - uses: goreleaser/goreleaser-action@v4
     #   with:
