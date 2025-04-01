@@ -27,6 +27,7 @@ jobs:
       shell: bash
       run: |
         make extenders
+        ls
     # #编译AdaptixServer项目
     # - uses: goreleaser/goreleaser-action@v4
     #   with:
