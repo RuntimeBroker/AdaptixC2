@@ -89,7 +89,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
          repo_token: ${{ secrets.GITHUB_TOKEN }}
-         file: AdaptixClient/build/Release/AdaptixClient.exe
+         file: AdaptixClient/build/Release/AdaptixClient_release.zip
          tag: ${{ github.ref }}
          overwrite: true
          file_glob: true
