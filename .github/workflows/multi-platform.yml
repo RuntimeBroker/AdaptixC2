@@ -82,7 +82,7 @@ jobs:
       shell: powershell
       run: |
         # 压缩 AdaptixClient/build/Release 目录下的所有文件
-        Compress-Archive -Path "${{ github.workspace }}/AdaptixClient/build/Release/*" -DestinationPath "${{ github.workspace }}/AdaptixClient/build/Release/AdaptixClient_release.zip" -Force
+        Compress-Archive -Path "${{ github.workspace }}/AdaptixClient/build/Release/*" -DestinationPath "${{ github.workspace }}/AdaptixClient/build/Release/AdaptixClient_winx64_release.zip" -Force
     # - name: Test
     #   working-directory: ${{ steps.strings.outputs.build-output-dir }}
     #   # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
