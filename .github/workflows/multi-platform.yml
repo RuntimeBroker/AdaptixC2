@@ -78,19 +78,21 @@ jobs:
     - name: 打包发布目录
       shell: powershell
       run: |
+        ls ${{ github.workspace }}/AdaptixClient/build
+        cd ls ${{ github.workspace }}/AdaptixClient/build/Release
         # 压缩 AdaptixClient/build/Release 目录下的所有文件
-        Compress-Archive -Path "${{ github.workspace }}/AdaptixClient/build/Release/*" -DestinationPath "${{ github.workspace }}/AdaptixClient/build/Release/AdaptixClient_release.zip" -Force
+        Compress-Archive -Path "${{ github.workspace }}/AdaptixClient/build/*" -DestinationPath "${{ github.workspace }}/AdaptixClient/build/Release/AdaptixClient_release.zip" -Force
     # - name: Test
     #   working-directory: ${{ steps.strings.outputs.build-output-dir }}
     #   # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
     #   # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
     #   run: ctest --build-config ${{ matrix.build_type }}
-    - name: Upload binaries to release
-      uses: svenstaro/upload-release-action@v2
-      with:
-         repo_token: ${{ secrets.GITHUB_TOKEN }}
-         file: AdaptixClient/build/Release/AdaptixClient_release.zip
-         tag: ${{ github.ref }}
-         overwrite: true
-         file_glob: true
-         draft: false #编译完成后 会自动发布到release
+    # - name: Upload binaries to release
+    #   uses: svenstaro/upload-release-action@v2
+    #   with:
+    #      repo_token: ${{ secrets.GITHUB_TOKEN }}
+    #      file: AdaptixClient/build/Release/AdaptixClient_release.zip
+    #      tag: ${{ github.ref }}
+    #      overwrite: true
+    #      file_glob: true
+    #      draft: false #编译完成后 会自动发布到release
