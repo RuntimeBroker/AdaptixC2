@@ -30,6 +30,8 @@ jobs:
         ls
         cd dist
         ls
+        cd extenders
+        ls
     # #编译AdaptixServer项目
     # - uses: goreleaser/goreleaser-action@v4
     #   with:
