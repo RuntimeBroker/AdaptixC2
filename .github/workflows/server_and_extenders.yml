@@ -42,8 +42,8 @@ jobs:
       run: |
          cd ./AdaptixServer
          zip ./profiles.zip ssl_gen.sh profile.json 404page.html
-         #zip -r ./dist/AdaptixC2Server_all_archive.zip ./dist/AdaptixC2* #编译后的名字 ，在虚拟机默认文件会在dist目录下
-         #zip -r /home/runner/work/AdaptixC2/AdaptixC2/dist/extenders.zip /home/runner/work/AdaptixC2/AdaptixC2/dist/extenders/*
+         zip -r ./dist/AdaptixC2Server_all_archive.zip ./dist/AdaptixC2* #编译后的名字 ，在虚拟机默认文件会在dist目录下
+         zip -r /home/runner/work/AdaptixC2/AdaptixC2/dist/extenders.zip /home/runner/work/AdaptixC2/AdaptixC2/dist/extenders/*
     - name: Upload AdaptixC2Server to release
       uses: svenstaro/upload-release-action@v2
       with:
