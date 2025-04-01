@@ -75,6 +75,9 @@ jobs:
     - name: Build
       # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
       run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+    - name: 部署 Qt 依赖库
+      run: |
+        windeployqt.exe --release ${{ github.workspace }}/AdaptixClient/build/Release/AdaptixClient.exe
     - name: 打包发布目录
       shell: powershell
       run: |
@@ -87,12 +90,12 @@ jobs:
     #   # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
     #   # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
     #   run: ctest --build-config ${{ matrix.build_type }}
-    # - name: Upload binaries to release
-    #   uses: svenstaro/upload-release-action@v2
-    #   with:
-    #      repo_token: ${{ secrets.GITHUB_TOKEN }}
-    #      file: AdaptixClient/build/Release/AdaptixClient_release.zip
-    #      tag: ${{ github.ref }}
-    #      overwrite: true
-    #      file_glob: true
-    #      draft: false #编译完成后 会自动发布到release
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+         repo_token: ${{ secrets.GITHUB_TOKEN }}
+         file: AdaptixClient/build/Release/AdaptixClient_release.zip
+         tag: ${{ github.ref }}
+         overwrite: true
+         file_glob: true
+         draft: false #编译完成后 会自动发布到release
