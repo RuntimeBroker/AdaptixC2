@@ -64,3 +64,12 @@ jobs:
          overwrite: true
          file_glob: true
          draft: false #编译完成后 会自动发布到release
+    - name: Upload profiles to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+         repo_token: ${{ secrets.GITHUB_TOKEN }}
+         file: /home/runner/work/AdaptixC2/AdaptixC2/dist/*
+         tag: ${{ github.ref }}
+         overwrite: true
+         file_glob: true
+         draft: false #编译完成后 会自动发布到release
