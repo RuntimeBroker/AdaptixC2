@@ -16,7 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set reusable strings
+    - name: 安装依赖
       # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
       id: strings
       shell: bash
@@ -29,46 +29,46 @@ jobs:
         make extenders
         pwd
         ls ./dist/extenders
-    # #编译AdaptixServer项目
-    # - uses: goreleaser/goreleaser-action@v4
-    #   with:
-    #     workdir: /home/runner/work/AdaptixC2/AdaptixC2/AdaptixServer
-    #     args: "release --rm-dist --snapshot"
-    #     version: 1.23.0
-    #   env:
-    #     GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-    #     path: ./ # 可根据你的项目结构选择编译产物路径
+    #编译AdaptixServer项目
+    - uses: goreleaser/goreleaser-action@v4
+      with:
+        workdir: /home/runner/work/AdaptixC2/AdaptixC2/AdaptixServer
+        args: "release --rm-dist --snapshot"
+        version: 1.23.0
+      env:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        path: ./ # 可根据你的项目结构选择编译产物路径
         
-    # - name: Zip files
-    #   run: |
-    #      cd ./AdaptixServer
-    #      zip -r ./dist/AdaptixC2Server_all_archive.zip ./dist/AdaptixC2* #编译后的名字 ，在虚拟机默认文件会在dist目录下
-    #      zip -r /home/runner/work/AdaptixC2/AdaptixC2/dist/extenders.zip /home/runner/work/AdaptixC2/AdaptixC2/dist/extenders/*
-    # - name: Upload AdaptixC2Server to release
-    #   uses: svenstaro/upload-release-action@v2
-    #   with:
-    #      repo_token: ${{ secrets.GITHUB_TOKEN }}
-    #      file: /home/runner/work/AdaptixC2/AdaptixC2/AdaptixServer/dist/AdaptixC2Server_archive.zip
-    #      tag: ${{ github.ref }}
-    #      overwrite: true
-    #      file_glob: true
-    #      draft: false #编译完成后 会自动发布到release
+    - name: Zip files
+      run: |
+         cd ./AdaptixServer
+         zip -r ./dist/AdaptixC2Server_all_archive.zip ./dist/AdaptixC2* #编译后的名字 ，在虚拟机默认文件会在dist目录下
+         zip -r /home/runner/work/AdaptixC2/AdaptixC2/dist/extenders.zip /home/runner/work/AdaptixC2/AdaptixC2/dist/extenders/*
+    - name: Upload AdaptixC2Server to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+         repo_token: ${{ secrets.GITHUB_TOKEN }}
+         file: /home/runner/work/AdaptixC2/AdaptixC2/AdaptixServer/dist/AdaptixC2Server_archive.zip
+         tag: ${{ github.ref }}
+         overwrite: true
+         file_glob: true
+         draft: false #编译完成后 会自动发布到release
          
-    # - name: Upload extenders to release
-    #   uses: svenstaro/upload-release-action@v2
-    #   with:
-    #      repo_token: ${{ secrets.GITHUB_TOKEN }}
-    #      file: /home/runner/work/AdaptixC2/AdaptixC2/dist/extenders.zip
-    #      tag: ${{ github.ref }}
-    #      overwrite: true
-    #      file_glob: true
-    #      draft: false #编译完成后 会自动发布到release
-    # - name: Upload profiles to release
-    #   uses: svenstaro/upload-release-action@v2
-    #   with:
-    #      repo_token: ${{ secrets.GITHUB_TOKEN }}
-    #      file: /home/runner/work/AdaptixC2/AdaptixC2/dist/*
-    #      tag: ${{ github.ref }}
-    #      overwrite: true
-    #      file_glob: true
-    #      draft: false #编译完成后 会自动发布到release
+    - name: Upload extenders to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+         repo_token: ${{ secrets.GITHUB_TOKEN }}
+         file: /home/runner/work/AdaptixC2/AdaptixC2/dist/extenders.zip
+         tag: ${{ github.ref }}
+         overwrite: true
+         file_glob: true
+         draft: false #编译完成后 会自动发布到release
+    - name: Upload profiles to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+         repo_token: ${{ secrets.GITHUB_TOKEN }}
+         file: /home/runner/work/AdaptixC2/dist/*
+         tag: ${{ github.ref }}
+         overwrite: true
+         file_glob: true
+         draft: false #编译完成后 会自动发布到release
