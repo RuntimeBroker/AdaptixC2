@@ -40,7 +40,9 @@ jobs:
     - name: Zip files
       run: |
          cd ./AdaptixServer
-         cp ./404page.html ./dist/ && cp ./profile.json ./dist/ && cp ./ssl_gen.sh ./dist/
+         cp ./404page.html ./dist/
+         cp ./profile.json ./dist/
+         cp ./ssl_gen.sh ./dist/
          zip -r ./dist/AdaptixC2Server_archive.zip ./dist/AdaptixC2* #编译后的名字 ，在虚拟机默认文件会在dist目录下
          zip -r /home/runner/work/AdaptixC2/AdaptixC2/dist/extenders.zip /home/runner/work/AdaptixC2/AdaptixC2/dist/extenders/*
     - name: Upload AdaptixC2Server to release
@@ -53,7 +55,7 @@ jobs:
          file_glob: true
          draft: false #编译完成后 会自动发布到release
          
-    - name: Upload AdaptixC2Server to extenders
+    - name: Upload extenders to release
       uses: svenstaro/upload-release-action@v2
       with:
          repo_token: ${{ secrets.GITHUB_TOKEN }}
